@@ -1,0 +1,10 @@
+body,
+.container{
+    box-sizing:border-box;
+}
+.container{
+    border:2px solid;
+}
+section {
+    display: flex;
+}
