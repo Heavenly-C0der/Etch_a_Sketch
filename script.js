@@ -9,7 +9,6 @@ function randColor(){
     return `rgb(${Math.round(Math.random()*255)},${Math.round(Math.random()*255)},${Math.round(Math.random()*255)})`;
 }
 
-const opa =0;
 function opacity(op){
     if(op==100) return op;
     else return op+opacity(op+10);
@@ -19,6 +18,8 @@ function delGrid(){
     let del=container;
     del.innerHTML="";
 }
+
+const opa=1; 
 
 for(let i=0;i<16;i++){
     const row = document.createElement("div");
@@ -38,6 +39,17 @@ for(let i=0;i<16;i++){
             col.style.opacity=`${opacity(opa)}%`;
             opa=0;
         });
+
+        col.addEventListener("click",()=>{
+            col.style.opacity=opa;
+            opa-=0.1;
+        });
+
+        col.addEventListener("contextmenu",(e)=>{
+            col.style.opacity=opa;
+            opa+=0.1;
+            e.preventDefault();
+        });
         
         row.appendChild(col);
     }
@@ -47,7 +59,7 @@ newGrid.textContent="New Grid";
 
 newGrid.addEventListener("click",()=>{
     let gridNum=+prompt("Enter the size of the square grid: ");
-
+    op=1;
     delGrid();
 
     while(gridNum>100 || gridNum==null){
@@ -73,6 +85,17 @@ newGrid.addEventListener("click",()=>{
                 opa=0;
             });
             
+            col.addEventListener("click",()=>{
+                col.style.opacity=opa;
+                opa-=0.1;
+            });
+    
+            col.addEventListener("contextmenu",(e)=>{
+                col.style.opacity=opa;
+                opa+=0.1;
+                e.preventDefault();
+            });
+
             row.appendChild(col);
         }
     }
